@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, Button } from "react-native";
 import styles from "../styles";
 
-export default class Home extends React.Component {
+class Home extends React.Component {
   state = {
     count: 10,
   };
@@ -20,6 +20,7 @@ export default class Home extends React.Component {
   };
 
   render() {
+    console.log("hola");
     return (
       <View style={styles.container}>
         <Text> Home</Text>
@@ -34,3 +35,5 @@ export default class Home extends React.Component {
     );
   }
 }
+
+export default Home;
