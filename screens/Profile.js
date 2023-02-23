@@ -1,13 +1,19 @@
-import { Text, View } from "react-native";
-import React, { Component } from "react";
+import { View, Text } from "react-native";
+import React from "react";
 import styles from "../styles";
+import { connect } from "react-redux";
 
-export default class Profile extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Profile</Text>
-      </View>
-    );
-  }
+function Profile(props) {
+  return (
+    <View style={styles.container}>
+      <Text>Profile 2222</Text>
+      <Text>{props.auth}</Text>
+    </View>
+  );
 }
+
+const mapStateToProps = (reducers) => {
+  return reducers.reducer1;
+};
+
+export default connect(mapStateToProps)(Profile);

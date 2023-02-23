@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
   count: 20,
+  auth: "elvis",
 };
 
 function reducer1(state = INITIAL_STATE, action) {
