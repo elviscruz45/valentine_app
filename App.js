@@ -11,6 +11,7 @@ import rootReducers from "./reducers";
 import reduxThunk from "redux-thunk";
 import logger from "redux-logger";
 import Navigator from "./navigation/Navigator";
+import firebase from "./config/firebase";
 
 // const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose;
 // const composedEnhancers = compose(
@@ -23,11 +24,13 @@ const composedEnhancers = compose(applyMiddleware(reduxThunk, logger));
 
 const store = createStore(rootReducers, {}, composedEnhancers);
 
+export const navigationRef = React.createRef();
+
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <NavigationContainer>
+        <NavigationContainer ref={navigationRef}>
           <Navigator />
         </NavigationContainer>
       </Provider>

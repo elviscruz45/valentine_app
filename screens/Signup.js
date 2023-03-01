@@ -7,9 +7,17 @@ import {
   updatePassword,
   updateBio,
   updateUsername,
+  signup,
 } from "../actions/user";
 
 class Signup extends Component {
+  signup = () => {
+    const { email, password, username, bio } = this.props;
+    this.props.signup(email, password);
+    console.log(this.props);
+    this.props.navigation.navigate("Login");
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -52,10 +60,7 @@ class Signup extends Component {
           placeholder="Biography"
           secureTextEntry={false}
         />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => console.log(this.props)}
-        >
+        <TouchableOpacity style={styles.button} onPress={() => this.signup()}>
           <Text>Signup</Text>
         </TouchableOpacity>
       </View>
@@ -64,7 +69,12 @@ class Signup extends Component {
 }
 
 const mapStateToProps = (reducers) => {
-  return reducers.user;
+  return {
+    username: reducers.user.username,
+    email: reducers.user.email,
+    password: reducers.user.password,
+    bio: reducers.user.bio,
+  };
 };
 
 export default connect(mapStateToProps, {
@@ -72,4 +82,5 @@ export default connect(mapStateToProps, {
   updatePassword,
   updateBio,
   updateUsername,
+  signup,
 })(Signup);

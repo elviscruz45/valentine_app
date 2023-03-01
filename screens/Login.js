@@ -2,15 +2,16 @@ import { Text, View, Image, TextInput, TouchableOpacity } from "react-native";
 import React, { Component } from "react";
 import styles from "../styles";
 import { connect } from "react-redux";
-import { updateEmail, updatePassword } from "../actions/user";
+import { updateEmail, updatePassword, login } from "../actions/user";
 
 class Login extends Component {
   login = () => {
-    console.log("hola");
+    const { email, password } = this.props;
+    this.props.login(email, password);
+    console.log(this.props);
   };
 
   render() {
-    console.log(this.props);
     return (
       <View style={styles.container}>
         <Image
@@ -37,11 +38,14 @@ class Login extends Component {
           placeholder="Password"
           secureTextEntry={true}
         />
+        <Text></Text>
 
         <TouchableOpacity style={styles.button} onPress={() => this.login()}>
           <Text>Login</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
+          style={styles.button}
           onPress={() => this.props.navigation.navigate("Signup")}
         >
           <Text>Signup</Text>
@@ -58,4 +62,5 @@ const mapStateToProps = (reducers) => {
 export default connect(mapStateToProps, {
   updateEmail,
   updatePassword,
+  login,
 })(Login);

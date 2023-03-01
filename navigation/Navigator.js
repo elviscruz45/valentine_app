@@ -4,18 +4,15 @@ import { connect } from "react-redux";
 import AuthNavigator from "./AuthNavigator";
 import TabNavigator from "./TabNavigator";
 import { user } from "../utils/userDB";
-
-const validation = {
-  username: "elviscruz45",
-  password: "123456",
-};
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+const auth = getAuth();
 
 function Navigator(props) {
-  return <>{user == validation ? <TabNavigator /> : <AuthNavigator />}</>;
+  return <>{props.user_login ? <TabNavigator /> : <AuthNavigator />}</>;
 }
 
 const mapStateToProps = (reducers) => {
-  return reducers.reducer1;
+  return reducers.user;
 };
 
 export default connect(mapStateToProps)(Navigator);

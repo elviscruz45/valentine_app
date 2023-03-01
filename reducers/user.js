@@ -3,6 +3,12 @@ const INITIAL_STATE = {
   email: null,
   password: null,
   bio: null,
+  user_login: null,
+  loading_login: false,
+  error_login: null,
+  user_signup: null,
+  loading_signup: false,
+  error_signup: null,
 };
 
 function user(state = INITIAL_STATE, action) {
@@ -15,6 +21,51 @@ function user(state = INITIAL_STATE, action) {
       return { ...state, bio: action.payload };
     case "UPDATE_EMAIL":
       return { ...state, email: action.payload };
+    case "SIGNIN_USER_REQUEST":
+      return {
+        ...state,
+        loading_login: true,
+        error_login: null,
+      };
+    case "SIGNIN_USER_SUCCESS":
+      return {
+        ...state,
+        user_login: action.payload,
+        loading_login: false,
+        error_login: null,
+      };
+    case "SIGNIN_USER_FAILURE":
+      return {
+        ...state,
+        user_login: null,
+        loading_login: false,
+        error_login: action.payload,
+      };
+    case "SIGNUP_USER_REQUEST":
+      return {
+        ...state,
+        loading_signup: true,
+        error_signup: null,
+      };
+    case "SIGNUP_USER_SUCCESS":
+      return {
+        ...state,
+        user_signup: action.payload,
+        loading_signup: false,
+        error_signup: null,
+      };
+    case "SIGNUP_USER_FAILURE":
+      return {
+        ...state,
+        user_signup: null,
+        loading_signup: false,
+        error_signup: action.payload,
+      };
+    case "LOGOUT_USER_REQUEST":
+      return {
+        ...state,
+        user_login: null,
+      };
     default:
       return state;
   }

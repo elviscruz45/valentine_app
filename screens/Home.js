@@ -3,6 +3,7 @@ import { Text, View, Button } from "react-native";
 import styles from "../styles";
 import { connect } from "react-redux";
 import { add1, subtract1 } from "../actions";
+import { logout } from "../actions/user";
 
 class Home extends React.Component {
   add = () => {
@@ -10,6 +11,11 @@ class Home extends React.Component {
   };
   subtract = () => {
     this.props.subtract1();
+  };
+
+  logout = () => {
+    console.log(this.props);
+    this.props.logout();
   };
 
   render() {
@@ -20,13 +26,17 @@ class Home extends React.Component {
         <Text>{this.props.count}</Text>
         <Button title="Add" onPress={() => this.add()} />
         <Button title="Subtract" onPress={() => this.subtract()} />
+        <Button title="Logout" onPress={() => this.logout()} />
       </View>
     );
   }
 }
 
 const mapStateToProps = (reducers) => {
-  return reducers.reducer1;
+  return {
+    count: reducers.reducer1.count,
+    user_login: reducers.user.user_login,
+  };
 };
 
-export default connect(mapStateToProps, { add1, subtract1 })(Home);
+export default connect(mapStateToProps, { add1, subtract1, logout })(Home);
