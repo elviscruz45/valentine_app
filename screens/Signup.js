@@ -13,8 +13,7 @@ import {
 class Signup extends Component {
   signup = () => {
     const { email, password, username, bio } = this.props;
-    this.props.signup(email, password);
-    console.log(this.props);
+    this.props.signup(email, password, username, bio);
     this.props.navigation.navigate("Login");
   };
 

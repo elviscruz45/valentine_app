@@ -1,4 +1,6 @@
-import firebase from "../config/firebase";
+import { collection, doc, setDoc, getDoc } from "firebase/firestore";
+import { dbase } from "../config/firebase";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -42,12 +44,21 @@ export const login = (email, password) => async (dispatch) => {
       email,
       password
     );
-    console.log(userCredential);
-    const user = userCredential.user;
-    dispatch({
-      type: "SIGNIN_USER_SUCCESS",
-      payload: user,
-    });
+    const user_uid = userCredential.user.uid;
+    console.log("hello user");
+    const docRef = doc(dbase, "users", user_uid);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      dispatch({
+        type: "SIGNIN_USER_SUCCESS",
+        payload: docSnap.data(),
+      });
+    } else {
+      // doc.data() will be undefined in this case
+      alert("No registered");
+    }
+    console.log("bye user");
   } catch (error) {
     dispatch({
       type: "SIGNIN_USER_FAILURE",
@@ -57,7 +68,7 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-export const signup = (email, password) => async (dispatch) => {
+export const signup = (email, password, username, bio) => async (dispatch) => {
   dispatch({ type: "SINGUP_USER_REQUEST" });
   try {
     const auth = getAuth();
@@ -66,12 +77,24 @@ export const signup = (email, password) => async (dispatch) => {
       email,
       password
     );
-    console.log(userCredential);
-    const user = userCredential.user;
-    dispatch({
-      type: "SIGNUP_USER_SUCCESS",
-      payload: user,
-    });
+    const response = userCredential.user;
+    if (response.uid) {
+      const user = {
+        uid: response.uid,
+        email: email,
+        username: username,
+        bio: bio,
+        photo: "",
+        token: null,
+      };
+      const docRef = doc(collection(dbase, "users"), user.uid);
+      await setDoc(docRef, user);
+
+      dispatch({
+        type: "SIGNUP_USER_SUCCESS",
+        payload: response,
+      });
+    }
   } catch (error) {
     dispatch({
       type: "SIGNUP_USER_FAILURE",

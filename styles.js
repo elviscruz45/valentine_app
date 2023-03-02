@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 export default styles = StyleSheet.create({
   container: {
@@ -29,5 +31,9 @@ export default styles = StyleSheet.create({
     borderWidth: 0.18,
     textAlign: "center",
     backgroundColor: "#EEEEEE",
+  },
+  postPhoto: {
+    height: 300,
+    width: width,
   },
 });

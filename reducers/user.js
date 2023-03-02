@@ -30,7 +30,9 @@ function user(state = INITIAL_STATE, action) {
     case "SIGNIN_USER_SUCCESS":
       return {
         ...state,
-        user_login: action.payload,
+        user_login: action.payload.username,
+        bio: action.payload.bio,
+        email: action.payload.email,
         loading_login: false,
         error_login: null,
       };
@@ -66,6 +68,7 @@ function user(state = INITIAL_STATE, action) {
         ...state,
         user_login: null,
       };
+
     default:
       return state;
   }

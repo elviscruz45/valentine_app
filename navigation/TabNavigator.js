@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Search from "../screens/Search";
-import Upload from "../screens/Upload";
+import Post from "../screens/Post";
 import Activity from "../screens/Activity";
 import Profile from "../screens/Profile";
 import { Image } from "react-native";
@@ -32,6 +32,8 @@ export default function TabNavigator() {
         name="Home"
         component={Home}
         options={{
+          headerTransparent: true,
+          title: "",
           tabBarLabel: "",
           tabBarIcon: ({ focused }) => renderHome(focused),
         }}
@@ -40,15 +42,19 @@ export default function TabNavigator() {
         name="Search"
         component={Search}
         options={{
+          title: "",
           tabBarLabel: "",
+          headerTransparent: true,
           tabBarIcon: ({ focused }) => renderSearch(focused),
         }}
       />
       <Tab.Screen
-        name="Upload"
-        component={Upload}
+        name="Post"
+        component={Post}
         options={{
           tabBarLabel: "",
+          title: "",
+          headerTransparent: true,
           tabBarIcon: ({ focused }) => renderUpload(focused),
         }}
       />
@@ -57,6 +63,9 @@ export default function TabNavigator() {
         component={Activity}
         options={{
           tabBarLabel: "",
+          headerTransparent: true,
+          title: "",
+
           tabBarIcon: ({ focused }) => renderActivity(focused),
         }}
       />
@@ -64,6 +73,8 @@ export default function TabNavigator() {
         name="Profile"
         component={Profile}
         options={{
+          headerTransparent: true,
+          title: "",
           tabBarLabel: "",
           tabBarIcon: ({ focused }) => renderProfile(focused),
         }}
