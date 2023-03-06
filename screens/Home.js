@@ -6,12 +6,10 @@ import { add1, subtract1 } from "../actions";
 import { logout } from "../actions/user";
 import { getPosts } from "../actions/post";
 import { post, uploadPost } from "../actions/post";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import {
   AntDesign,
   MaterialCommunityIcons,
   FontAwesome,
-  SimpleLineIcons,
 } from "@expo/vector-icons";
 
 class Home extends React.Component {
@@ -40,7 +38,7 @@ class Home extends React.Component {
             <View
               style={{
                 borderBottomWidth: 2,
-                borderBottomColor: "#DFDFDF",
+                borderBottomColor: "#E35622",
                 margin: 2,
               }}
             >
@@ -67,32 +65,37 @@ class Home extends React.Component {
                   {"2 photos more ...  "}
                 </Text>
               </View>
-              <Image
-                source={{ uri: item.postPhoto }}
-                style={styles.postPhoto}
-              />
+              <View>
+                <Image
+                  source={{ uri: item.postPhoto }}
+                  style={styles.postPhoto}
+                />
 
-              <View style={styles.row}>
-                <AntDesign
-                  style={{ margin: 10 }}
-                  name="like2"
-                  size={24}
-                  color="black"
-                />
-                <MaterialCommunityIcons
-                  style={{ margin: 10 }}
-                  name="comment-text-outline"
-                  size={24}
-                  color="black"
-                />
-                <FontAwesome
-                  style={{ margin: 10 }}
-                  name="send-o"
-                  size={24}
-                  color="black"
-                />
+                <View style={styles.row}>
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <AntDesign
+                      style={{ margin: 10 }}
+                      name="like2"
+                      size={24}
+                      color="black"
+                    />
+                    <Text>15 Likes</Text>
+                  </View>
+                  <MaterialCommunityIcons
+                    style={{ margin: 10, marginLeft: 100 }}
+                    name="comment-text-outline"
+                    size={24}
+                    color="black"
+                  />
+                  <FontAwesome
+                    style={{ margin: 10, marginLeft: 110 }}
+                    name="send-o"
+                    size={24}
+                    color="black"
+                  />
+                </View>
+                <Text style={{ margin: 10 }}>{item.postDescription}</Text>
               </View>
-              <Text style={{ margin: 10 }}>{item.postDescription}</Text>
               <Text></Text>
             </View>
           )}
