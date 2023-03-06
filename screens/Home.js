@@ -24,11 +24,26 @@ class Home extends React.Component {
   render() {
     if (this.props.post_list === null) return null;
     return (
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          {
+            borderBottomWidth: 2,
+            borderBottomColor: "#DFDFDF",
+            margin: 2,
+          },
+        ]}
+      >
         <FlatList
           data={this.props.post_list}
           renderItem={({ item }) => (
-            <View>
+            <View
+              style={{
+                borderBottomWidth: 2,
+                borderBottomColor: "#DFDFDF",
+                margin: 2,
+              }}
+            >
               <View style={[styles.row, styles.center]}>
                 <View style={[styles.row, styles.center]}>
                   <Image
@@ -43,12 +58,20 @@ class Home extends React.Component {
                   />
                   <Text>{item.username}</Text>
                 </View>
-                <SimpleLineIcons name="flag" size={24} color="black" />
+              </View>
+              <View style={[styles.row, styles.center]}>
+                <Text style={{ margin: 5, color: "#5B5B5B" }}>
+                  {"Date: March 07, 2023 17:00 Hr "}
+                </Text>
+                <Text style={{ margin: 5, color: "black" }}>
+                  {"2 photos more ...  "}
+                </Text>
               </View>
               <Image
                 source={{ uri: item.postPhoto }}
                 style={styles.postPhoto}
               />
+
               <View style={styles.row}>
                 <AntDesign
                   style={{ margin: 10 }}
@@ -70,7 +93,6 @@ class Home extends React.Component {
                 />
               </View>
               <Text style={{ margin: 10 }}>{item.postDescription}</Text>
-              <Text></Text>
               <Text></Text>
             </View>
           )}

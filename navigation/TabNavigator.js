@@ -15,6 +15,7 @@ import {
   SimpleLineIcons,
   Fontisto,
   Ionicons,
+  MaterialIcons,
 } from "@expo/vector-icons";
 
 const imgHome = require("../assets/Home.png");
@@ -72,12 +73,12 @@ export default function TabNavigator() {
               />
               <Ionicons
                 style={{ margin: 5 }}
-                name="ios-notifications-outline"
+                name="notifications"
                 size={30}
                 color="black"
               />
-              <Fontisto
-                style={{ margin: 7 }}
+              <MaterialIcons
+                style={{ margin: 5 }}
                 name="favorite"
                 size={30}
                 color="black"

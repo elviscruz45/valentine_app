@@ -12,6 +12,7 @@ export default styles = StyleSheet.create({
   center: {
     alignItems: "center",
     justifyContent: "space-between",
+    margin: 0,
   },
   row: {
     flexDirection: "row",
