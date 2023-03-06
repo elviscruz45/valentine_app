@@ -12,8 +12,8 @@ import {
 
 class Signup extends Component {
   signup = () => {
-    const { email, password, username, bio } = this.props;
-    this.props.signup(email, password, username, bio);
+    const { email, password, username, bio, user_photo } = this.props;
+    this.props.signup(email, password, username, bio, user_photo);
     this.props.navigation.navigate("Login");
   };
 
@@ -73,6 +73,7 @@ const mapStateToProps = (reducers) => {
     email: reducers.user.email,
     password: reducers.user.password,
     bio: reducers.user.bio,
+    user_photo: reducers.user.user_photo,
   };
 };
 

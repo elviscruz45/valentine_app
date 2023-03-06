@@ -45,11 +45,9 @@ export const login = (email, password) => async (dispatch) => {
       password
     );
     const user_uid = userCredential.user.uid;
-    console.log("hello user");
     const docRef = doc(dbase, "users", user_uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
       dispatch({
         type: "SIGNIN_USER_SUCCESS",
         payload: docSnap.data(),
@@ -68,41 +66,42 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-export const signup = (email, password, username, bio) => async (dispatch) => {
-  dispatch({ type: "SINGUP_USER_REQUEST" });
-  try {
-    const auth = getAuth();
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const response = userCredential.user;
-    if (response.uid) {
-      const user = {
-        uid: response.uid,
-        email: email,
-        username: username,
-        bio: bio,
-        photo: "",
-        token: null,
-      };
-      const docRef = doc(collection(dbase, "users"), user.uid);
-      await setDoc(docRef, user);
+export const signup =
+  (email, password, username, bio, user_photo) => async (dispatch) => {
+    dispatch({ type: "SINGUP_USER_REQUEST" });
+    try {
+      const auth = getAuth();
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const response = userCredential.user;
+      if (response.uid) {
+        const user = {
+          uid: response.uid,
+          email: email,
+          username: username,
+          bio: bio,
+          user_photo: user_photo,
+          token: null,
+        };
+        const docRef = doc(collection(dbase, "users"), user.uid);
+        await setDoc(docRef, user);
 
+        dispatch({
+          type: "SIGNUP_USER_SUCCESS",
+          payload: response,
+        });
+      }
+    } catch (error) {
       dispatch({
-        type: "SIGNUP_USER_SUCCESS",
-        payload: response,
+        type: "SIGNUP_USER_FAILURE",
+        payload: error.message,
       });
+      alert(error.message);
     }
-  } catch (error) {
-    dispatch({
-      type: "SIGNUP_USER_FAILURE",
-      payload: error.message,
-    });
-    alert(error.message);
-  }
-};
+  };
 
 export const logout = () => async (dispatch) => {
   dispatch({ type: "LOGOUT_USER_REQUEST" });

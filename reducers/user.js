@@ -9,6 +9,9 @@ const INITIAL_STATE = {
   user_signup: null,
   loading_signup: false,
   error_signup: null,
+  uid: null,
+  user_photo:
+    "https://firebasestorage.googleapis.com/v0/b/valentine-app-ac496.appspot.com/o/rsz_elvis_cruz_verano.jpeg?alt=media&token=af2faafa-c372-4f97-8793-1caea61c9910",
 };
 
 function user(state = INITIAL_STATE, action) {
@@ -33,6 +36,7 @@ function user(state = INITIAL_STATE, action) {
         user_login: action.payload.username,
         bio: action.payload.bio,
         email: action.payload.email,
+        uid: action.payload.uid,
         loading_login: false,
         error_login: null,
       };

@@ -8,7 +8,6 @@ class Login extends Component {
   login = () => {
     const { email, password } = this.props;
     this.props.login(email, password);
-    console.log(this.props);
   };
 
   render() {

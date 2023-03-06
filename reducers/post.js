@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
   description: null,
+  post_list: null,
 };
 
 function post(state = INITIAL_STATE, action) {
@@ -9,7 +10,11 @@ function post(state = INITIAL_STATE, action) {
         ...state,
         description: action.payload,
       };
-
+    case "GET_POSTS_SUCCESS":
+      return {
+        ...state,
+        post_list: action.payload,
+      };
     default:
       return state;
   }

@@ -32,8 +32,8 @@ export default function TabNavigator() {
         name="Home"
         component={Home}
         options={{
-          headerTransparent: true,
-          title: "",
+          // headerTransparent: true,
+          title: "Valentine",
           tabBarLabel: "",
           tabBarIcon: ({ focused }) => renderHome(focused),
         }}

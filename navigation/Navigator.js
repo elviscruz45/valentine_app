@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import AuthNavigator from "./AuthNavigator";
 import TabNavigator from "./TabNavigator";
 import { getAuth } from "firebase/auth";
-
 import { app } from "../config/firebase";
 
 const auth = getAuth(app);
