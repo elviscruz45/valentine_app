@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
   username: null,
+  equipmentname: "C2-CR001",
   email: null,
   password: null,
   bio: null,
@@ -12,6 +13,8 @@ const INITIAL_STATE = {
   uid: null,
   user_photo:
     "https://firebasestorage.googleapis.com/v0/b/valentine-app-ac496.appspot.com/o/rsz_elvis_cruz_verano.jpeg?alt=media&token=af2faafa-c372-4f97-8793-1caea61c9910",
+  equipment_photo:
+    "https://firebasestorage.googleapis.com/v0/b/valentine-app-ac496.appspot.com/o/CHI.jpeg?alt=media&token=b578d26f-a92b-4125-9022-a8c3537134aa",
 };
 
 function user(state = INITIAL_STATE, action) {

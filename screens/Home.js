@@ -32,6 +32,12 @@ class Home extends React.Component {
               <View style={[styles.row, styles.center]}>
                 <View style={[styles.row, styles.center]}>
                   <Image
+                    source={{ uri: this.props.equipment_photo }}
+                    style={styles.roundImage}
+                  />
+                  <Text>{this.props.equipmentname}</Text>
+                  <Text>{"          "}</Text>
+                  <Image
                     source={{ uri: this.props.user_photo }}
                     style={styles.roundImage}
                   />
@@ -45,19 +51,19 @@ class Home extends React.Component {
               />
               <View style={styles.row}>
                 <AntDesign
-                  style={{ margin: 5 }}
+                  style={{ margin: 10 }}
                   name="like2"
                   size={24}
                   color="black"
                 />
                 <MaterialCommunityIcons
-                  style={{ margin: 5 }}
+                  style={{ margin: 10 }}
                   name="comment-text-outline"
                   size={24}
                   color="black"
                 />
                 <FontAwesome
-                  style={{ margin: 5 }}
+                  style={{ margin: 10 }}
                   name="send-o"
                   size={24}
                   color="black"
@@ -84,6 +90,8 @@ const mapStateToProps = (reducers) => {
     email: reducers.user.email,
     uid: reducers.user.uid,
     post_list: reducers.post.post_list,
+    equipment_photo: reducers.user.equipment_photo,
+    equipmentname: reducers.user.equipmentname,
   };
 };
 

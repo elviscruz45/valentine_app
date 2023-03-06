@@ -1,6 +1,4 @@
-import { View, Text } from "react-native";
 import React from "react";
-import styles from "../styles";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "../screens/Login";
 import Signup from "../screens/Signup";

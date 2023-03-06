@@ -5,7 +5,17 @@ import Search from "../screens/Search";
 import Post from "../screens/Post";
 import Activity from "../screens/Activity";
 import Profile from "../screens/Profile";
-import { Image } from "react-native";
+import styles from "../styles";
+import { Image, View } from "react-native";
+import { HomeScreen } from "./StackNavigator";
+import {
+  AntDesign,
+  MaterialCommunityIcons,
+  FontAwesome,
+  SimpleLineIcons,
+  Fontisto,
+  Ionicons,
+} from "@expo/vector-icons";
 
 const imgHome = require("../assets/Home.png");
 const imgHomeFilled = require("../assets/HomeFilled.png");
@@ -21,7 +31,7 @@ const Tab = createBottomTabNavigator();
 export default function TabNavigator() {
   return (
     <Tab.Navigator
-      initialRouterName="Home"
+      initialRouterName="HomeScreen"
       tabBarOptions={{
         style: {
           backgroundColor: "black",
@@ -29,11 +39,51 @@ export default function TabNavigator() {
       }}
     >
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="HomeScreen"
+        component={HomeScreen}
         options={{
-          // headerTransparent: true,
-          title: "Valentine",
+          headerTransparent: false,
+          headerTitle: () => (
+            <View style={{ flexDirection: "row" }}>
+              <Image
+                source={require("../assets/smcv2.png")}
+                style={{ width: 30, height: 30 }}
+              />
+              <Image
+                source={require("../assets/valentine.png")}
+                style={{ width: 120, height: 30 }}
+              />
+            </View>
+          ),
+          headerLeft: () => (
+            <Image
+              source={require("../assets/Elvis_Cruz_Formal.jpg")}
+              style={styles.roundImage}
+            />
+          ),
+          // title: "",
+          headerRight: () => (
+            <View style={{ flexDirection: "row" }}>
+              <Ionicons
+                style={{ margin: 5 }}
+                name="md-camera"
+                size={30}
+                color="black"
+              />
+              <Ionicons
+                style={{ margin: 5 }}
+                name="ios-notifications-outline"
+                size={30}
+                color="black"
+              />
+              <Fontisto
+                style={{ margin: 7 }}
+                name="favorite"
+                size={30}
+                color="black"
+              />
+            </View>
+          ),
           tabBarLabel: "",
           tabBarIcon: ({ focused }) => renderHome(focused),
         }}
