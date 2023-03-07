@@ -1,22 +1,13 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "../screens/Home";
 import Search from "../screens/Search";
 import Post from "../screens/Post";
 import Activity from "../screens/Activity";
 import Profile from "../screens/Profile";
 import styles from "../styles";
-import { Image, View } from "react-native";
+import { Image, View, TouchableOpacity, SafeAreaView } from "react-native";
 import { HomeScreen } from "./StackNavigator";
-import {
-  AntDesign,
-  MaterialCommunityIcons,
-  FontAwesome,
-  SimpleLineIcons,
-  Fontisto,
-  Ionicons,
-  MaterialIcons,
-} from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 const imgHome = require("../assets/Home.png");
 const imgHomeFilled = require("../assets/HomeFilled.png");
@@ -29,7 +20,7 @@ const imgfactoryFilled = require("../assets/factoryFilled.png");
 
 const Tab = createBottomTabNavigator();
 
-export default function TabNavigator() {
+function TabNavigator(props) {
   return (
     <Tab.Navigator
       initialRouterName="HomeScreen"
@@ -40,7 +31,7 @@ export default function TabNavigator() {
       }}
     >
       <Tab.Screen
-        name="HomeScreen"
+        name=" "
         component={HomeScreen}
         options={{
           headerTransparent: false,
@@ -56,35 +47,7 @@ export default function TabNavigator() {
               />
             </View>
           ),
-          headerLeft: () => (
-            <Image
-              source={require("../assets/Elvis_Cruz_Formal.jpg")}
-              style={styles.roundImage}
-            />
-          ),
-          // title: "",
-          headerRight: () => (
-            <View style={{ flexDirection: "row" }}>
-              <Ionicons
-                style={{ margin: 5 }}
-                name="md-camera"
-                size={30}
-                color="black"
-              />
-              <Ionicons
-                style={{ margin: 5 }}
-                name="notifications"
-                size={30}
-                color="black"
-              />
-              <MaterialIcons
-                style={{ margin: 5 }}
-                name="favorite"
-                size={30}
-                color="black"
-              />
-            </View>
-          ),
+
           tabBarLabel: "",
           tabBarIcon: ({ focused }) => renderHome(focused),
         }}
@@ -178,3 +141,5 @@ function renderProfile(focused) {
     />
   );
 }
+
+export default TabNavigator;

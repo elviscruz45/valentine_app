@@ -15,9 +15,6 @@ import {
 class Home extends React.Component {
   componentDidMount() {
     this.props.getPosts();
-    console.log("phto_iddd");
-
-    console.log(this.props);
   }
   render() {
     if (this.props.post_list === null) return null;
@@ -82,13 +79,13 @@ class Home extends React.Component {
                     <Text>15 Likes</Text>
                   </View>
                   <MaterialCommunityIcons
-                    style={{ margin: 10, marginLeft: 100 }}
+                    style={{ margin: 10, marginLeft: 90 }}
                     name="comment-text-outline"
                     size={24}
                     color="black"
                   />
                   <FontAwesome
-                    style={{ margin: 10, marginLeft: 110 }}
+                    style={{ margin: 10, marginLeft: 120 }}
                     name="send-o"
                     size={24}
                     color="black"
