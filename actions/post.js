@@ -44,3 +44,25 @@ export const getPosts = () => async (dispatch) => {
     alert("No registered");
   }
 };
+
+export const savePhotoUri = (uri) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "SAVE_PHOTO_URI",
+      payload: uri,
+    });
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
+export const uploadPost_Photo = (upload) => async (dispatch) => {
+  try {
+    const docRef = await addDoc(collection(dbase, "posts"), upload);
+    const new_upload = { ...upload, id: docRef.id };
+    const washingtonRef = doc(dbase, "posts", docRef.id);
+    await updateDoc(washingtonRef, new_upload);
+  } catch (error) {
+    alert(error.message);
+  }
+};

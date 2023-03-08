@@ -5,17 +5,13 @@ import { connect } from "react-redux";
 import { post, uploadPost } from "../actions/post";
 import { storage } from "../config/firebase";
 import { ref, uploadBytes } from "firebase/storage";
+import { uploadPost_Photo } from "../actions/post";
 
-class Post extends Component {
+class Post_Camera extends Component {
   async uploadPost1() {
-    const imgRef = ref(storage, "images10.jpeg");
-    uploadBytes(imgRef, "../Home_Images/images10.jpeg").then((snapshot) => {
-      console.log("Uploaded a blob or file!");
-    });
-    const { user_login, upload_post, bio, email, uid } = this.props;
+    const { user_login, upload_post, bio, email, uid, photo_uri } = this.props;
     const upload = {
-      postPhoto:
-        "https://firebasestorage.googleapis.com/v0/b/valentine-app-ac496.appspot.com/o/images6.jpeg?alt=media&token=e1cb22c1-925e-4cfa-8906-8556f6276ec2",
+      postPhoto: photo_uri,
       postDescription: upload_post,
       bio: bio,
       uid: uid,
@@ -23,7 +19,8 @@ class Post extends Component {
       username: user_login,
       email: email,
     };
-    this.props.uploadPost(upload);
+    this.props.uploadPost_Photo(upload);
+    console.log(this.props);
   }
 
   render() {
@@ -31,7 +28,7 @@ class Post extends Component {
       <View style={styles.container}>
         <Image
           source={{
-            uri: "https://firebasestorage.googleapis.com/v0/b/valentine-app-ac496.appspot.com/o/images6.jpeg?alt=media&token=e1cb22c1-925e-4cfa-8906-8556f6276ec2",
+            uri: this.props.photo_uri,
           }}
           style={styles.postPhoto}
         />
@@ -59,10 +56,13 @@ const mapStateToProps = (reducers) => {
     count: reducers.reducer1.count,
     user_login: reducers.user.user_login,
     upload_post: reducers.post.description,
+    photo_uri: reducers.post.photo_uri,
     bio: reducers.user.bio,
     email: reducers.user.email,
     uid: reducers.user.uid,
   };
 };
 
-export default connect(mapStateToProps, { post, uploadPost })(Post);
+export default connect(mapStateToProps, { post, uploadPost_Photo })(
+  Post_Camera
+);

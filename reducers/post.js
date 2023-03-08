@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   description: null,
   post_list: null,
+  photo_uri: null,
 };
 
 function post(state = INITIAL_STATE, action) {
@@ -14,6 +15,11 @@ function post(state = INITIAL_STATE, action) {
       return {
         ...state,
         post_list: action.payload,
+      };
+    case "SAVE_PHOTO_URI":
+      return {
+        ...state,
+        photo_uri: action.payload,
       };
     default:
       return state;

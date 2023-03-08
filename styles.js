@@ -49,6 +49,12 @@ export default styles = StyleSheet.create({
     height: 250,
     width: width,
   },
+
+  cameraButton: {
+    borderRadius: 50,
+    alignSelf: "flex-end",
+    marginLeft: 80,
+  },
   roundImage: {
     width: 40,
     height: 40,

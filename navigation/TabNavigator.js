@@ -4,10 +4,8 @@ import Search from "../screens/Search";
 import Post from "../screens/Post";
 import Activity from "../screens/Activity";
 import Profile from "../screens/Profile";
-import styles from "../styles";
-import { Image, View, TouchableOpacity, SafeAreaView } from "react-native";
+import { Image } from "react-native";
 import { HomeScreen } from "./StackNavigator";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 const imgHome = require("../assets/Home.png");
 const imgHomeFilled = require("../assets/HomeFilled.png");
@@ -24,7 +22,7 @@ function TabNavigator(props) {
   return (
     <Tab.Navigator
       initialRouterName="HomeScreen"
-      tabBarOptions={{
+      screenOptions={{
         style: {
           backgroundColor: "black",
         },
@@ -35,18 +33,9 @@ function TabNavigator(props) {
         component={HomeScreen}
         options={{
           headerTransparent: false,
-          headerTitle: () => (
-            <View style={{ flexDirection: "row" }}>
-              <Image
-                source={require("../assets/smcv2.png")}
-                style={{ width: 30, height: 30 }}
-              />
-              <Image
-                source={require("../assets/valentine.png")}
-                style={{ width: 120, height: 30 }}
-              />
-            </View>
-          ),
+          headerStyle: {
+            height: 34, // Specify the height of your custom header
+          },
 
           tabBarLabel: "",
           tabBarIcon: ({ focused }) => renderHome(focused),
@@ -68,7 +57,7 @@ function TabNavigator(props) {
         options={{
           tabBarLabel: "",
           title: "",
-          headerTransparent: true,
+          headerTransparent: false,
           tabBarIcon: ({ focused }) => renderUpload(focused),
         }}
       />
