@@ -6,6 +6,7 @@ import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "../styles";
 import { savePhotoUri } from "../actions/post";
+import * as ImageManipulator from "expo-image-manipulator";
 
 function cameraUpload(props) {
   const [type, setType] = useState(CameraType.back);
@@ -32,10 +33,16 @@ function cameraUpload(props) {
 
   async function snapPhoto() {
     if (cameraRef.current) {
-      const options = { quality: 0.01, base64: true };
+      const options = { quality: 1, base64: true };
       const data = await cameraRef.current.takePictureAsync(options);
-      console.log(data);
-      props.savePhotoUri(data.uri);
+
+      const resizedPhoto = await ImageManipulator.manipulateAsync(
+        data.uri,
+        [{ resize: { width: 800 } }],
+        { compress: 0.1, format: "jpeg", base64: true }
+      );
+
+      props.savePhotoUri(resizedPhoto.uri);
       props.navigation.navigate("Post_Camera");
     }
   }

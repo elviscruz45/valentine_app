@@ -3,13 +3,12 @@ import React, { Component } from "react";
 import styles from "../styles";
 import { connect } from "react-redux";
 import { post, uploadPost } from "../actions/post";
-import { storage } from "../config/firebase";
-import { ref, uploadBytes } from "firebase/storage";
 import { uploadPost_Photo } from "../actions/post";
 
 class Post_Camera extends Component {
   async uploadPost1() {
-    const { user_login, upload_post, bio, email, uid, photo_uri } = this.props;
+    const { user_login, upload_post, bio, email, uid, photo_uri, photo_uuid } =
+      this.props;
     const upload = {
       postPhoto: photo_uri,
       postDescription: upload_post,
@@ -18,9 +17,10 @@ class Post_Camera extends Component {
       photo: "download url",
       username: user_login,
       email: email,
+      photo_uuid: photo_uuid,
     };
+    console.log(photo_uuid);
     this.props.uploadPost_Photo(upload);
-    console.log(this.props);
   }
 
   render() {
@@ -60,6 +60,7 @@ const mapStateToProps = (reducers) => {
     bio: reducers.user.bio,
     email: reducers.user.email,
     uid: reducers.user.uid,
+    photo_uuid: reducers.post.photo_uuid,
   };
 };
 

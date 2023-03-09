@@ -24,4 +24,3 @@ export const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 export const dbase = getFirestore(app);
 export const storage = getStorage(app);
-export const storageRef = ref(storage);

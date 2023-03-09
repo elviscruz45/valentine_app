@@ -2,6 +2,7 @@ const INITIAL_STATE = {
   description: null,
   post_list: null,
   photo_uri: null,
+  photo_uuid: null,
 };
 
 function post(state = INITIAL_STATE, action) {
@@ -20,6 +21,11 @@ function post(state = INITIAL_STATE, action) {
       return {
         ...state,
         photo_uri: action.payload,
+      };
+    case "SET_PHOTO_STORAGE_UUID":
+      return {
+        ...state,
+        photo_uuid: action.payload,
       };
     default:
       return state;

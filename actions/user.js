@@ -56,7 +56,6 @@ export const login = (email, password) => async (dispatch) => {
       // doc.data() will be undefined in this case
       alert("No registered");
     }
-    console.log("bye user");
   } catch (error) {
     dispatch({
       type: "SIGNIN_USER_FAILURE",

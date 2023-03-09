@@ -11,7 +11,6 @@ const Stack = createStackNavigator();
 export function HomeScreen(props) {
   function handleCameraPress() {
     props.navigation.navigate("Camera");
-    console.log("hahahh");
     // navigation.navigate("Camera");
   }
   return (

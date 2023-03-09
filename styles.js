@@ -48,6 +48,7 @@ export default styles = StyleSheet.create({
   postPhoto: {
     height: 250,
     width: width,
+    marginTop: 0,
   },
 
   cameraButton: {
