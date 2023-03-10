@@ -19,7 +19,6 @@ class Post_Camera extends Component {
       email: email,
       photo_uuid: photo_uuid,
     };
-    console.log(photo_uuid);
     this.props.uploadPost_Photo(upload);
   }
 

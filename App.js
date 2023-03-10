@@ -18,7 +18,7 @@ import Navigator from "./navigation/Navigator";
 // );
 
 // const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const composedEnhancers = compose(applyMiddleware(reduxThunk, logger));
+const composedEnhancers = compose(applyMiddleware(reduxThunk)); //, logger))-> active this to follow the prev and next status
 
 const store = createStore(rootReducers, {}, composedEnhancers);
 

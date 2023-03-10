@@ -8,10 +8,6 @@ import { ref, uploadBytes } from "firebase/storage";
 
 class Post extends Component {
   async uploadPost1() {
-    const imgRef = ref(storage, "images10.jpeg");
-    uploadBytes(imgRef, "../Home_Images/images10.jpeg").then((snapshot) => {
-      console.log("Uploaded a blob or file!");
-    });
     const { user_login, upload_post, bio, email, uid } = this.props;
     const upload = {
       postPhoto:

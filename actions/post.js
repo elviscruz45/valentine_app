@@ -2,11 +2,9 @@ import { dbase, storage } from "../config/firebase";
 import {
   collection,
   doc,
-  setDoc,
   getDocs,
   addDoc,
   updateDoc,
-  getMetadata,
 } from "firebase/firestore";
 
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -63,58 +61,40 @@ export const savePhotoUri = (uri) => async (dispatch) => {
 export const uploadPost_Photo = (upload) => async (dispatch) => {
   try {
     const docRef = await addDoc(collection(dbase, "posts"), upload);
-    const new_upload = { ...upload, id: docRef.id };
+    const uuid = uuidv4();
+    const new_upload = { ...upload, id: docRef.id, photo_uuid: uuid };
     const washingtonRef = doc(dbase, "posts", docRef.id);
     await updateDoc(washingtonRef, new_upload);
 
     // to upload a photo in the firebase storage
-    const uuid = uuidv4();
-    const storageRef = ref(storage, `${uuid}`);
-
-    // Get the download URL
-    getDownloadURL(storageRef)
-      .then((url) => {
-        console.log(
-          "URL getDownloadURL INIT ---------------------------------------"
-        );
-        console.log(url);
-        console.log(
-          "URL getDownloadURL FINISH ---------------------------------------"
-        );
-      })
-      .catch((error) => {
-        // A full list of error codes is available at
-        // https://firebase.google.com/docs/storage/web/handle-errors
-        switch (error.code) {
-          case "storage/object-not-found":
-            // File doesn't exist
-            break;
-          case "storage/unauthorized":
-            // User doesn't have permission to access the object
-            break;
-          case "storage/canceled":
-            // User canceled the upload
-            break;
-          // ...
-          case "storage/unknown":
-            // Unknown error occurred, inspect the server response
-            break;
-        }
-      });
-
-    fetch(upload.postPhoto)
-      .then((response) => response.blob())
-      .then((blob) => uploadBytes(storageRef, blob))
-      .then((snapshot) => {
-        console.log("Uploaded a blob or file!");
-
-        console.log("ENNNDDUploaded a blob or file!");
-      });
-
     dispatch({
       type: "SET_PHOTO_STORAGE_UUID",
       payload: uuid,
     });
+    const storageRef = ref(storage, `${uuid}`);
+    fetch(upload.postPhoto)
+      .then((response) => response.blob())
+      .then((blob) => uploadBytes(storageRef, blob))
+      .then((snapshot) => {
+        console.log("Uploaded a blob or file new filestone!");
+        return getDownloadURL(storageRef);
+      })
+      .then((url) => {
+        console.log("url", url);
+        const new_upload2 = {
+          ...upload,
+          id: docRef.id,
+          photo_uuid: uuid,
+          postPhoto: url,
+        };
+        const washingtonRef2 = doc(dbase, "posts", docRef.id);
+        updateDoc(washingtonRef2, new_upload2);
+      })
+      .catch((error) => {
+        console.log(error.code);
+      });
+
+    console.log("Completed");
   } catch (error) {
     alert(error.message);
   }
