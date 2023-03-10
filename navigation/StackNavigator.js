@@ -28,7 +28,7 @@ export function HomeScreen(props) {
                 style={{ width: 30, height: 30 }}
               />
               <Image
-                source={require("../assets/valentine.png")}
+                source={require("../assets/teseo3.png")}
                 style={{ width: 120, height: 30 }}
               />
             </View>

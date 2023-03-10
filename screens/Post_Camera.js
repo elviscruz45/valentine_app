@@ -2,7 +2,7 @@ import { Text, View, TextInput, Image, TouchableOpacity } from "react-native";
 import React, { Component } from "react";
 import styles from "../styles";
 import { connect } from "react-redux";
-import { post, uploadPost } from "../actions/post";
+import { post } from "../actions/post";
 import { uploadPost_Photo } from "../actions/post";
 
 class Post_Camera extends Component {
@@ -20,6 +20,7 @@ class Post_Camera extends Component {
       photo_uuid: photo_uuid,
     };
     this.props.uploadPost_Photo(upload);
+    this.props.navigation.navigate("Home");
   }
 
   render() {

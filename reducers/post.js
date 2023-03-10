@@ -27,9 +27,13 @@ function post(state = INITIAL_STATE, action) {
         ...state,
         photo_uuid: action.payload,
       };
+    case "ADDING_NEW_POST":
+      return {
+        ...state,
+        post_list: [...state.post_list, action.payload],
+      };
     default:
       return state;
   }
 }
-
 export default post;

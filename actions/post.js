@@ -76,11 +76,9 @@ export const uploadPost_Photo = (upload) => async (dispatch) => {
       .then((response) => response.blob())
       .then((blob) => uploadBytes(storageRef, blob))
       .then((snapshot) => {
-        console.log("Uploaded a blob or file new filestone!");
         return getDownloadURL(storageRef);
       })
       .then((url) => {
-        console.log("url", url);
         const new_upload2 = {
           ...upload,
           id: docRef.id,
@@ -89,12 +87,21 @@ export const uploadPost_Photo = (upload) => async (dispatch) => {
         };
         const washingtonRef2 = doc(dbase, "posts", docRef.id);
         updateDoc(washingtonRef2, new_upload2);
+        alert("your post have been uploaded");
+        dispatch({
+          type: "ADDING_NEW_POST",
+          payload: new_upload2,
+        });
+        dispatch({
+          type: "UPDATE_DESCRIPTION",
+          payload: "",
+        });
       })
       .catch((error) => {
         console.log(error.code);
       });
 
-    console.log("Completed");
+    ("Completed");
   } catch (error) {
     alert(error.message);
   }

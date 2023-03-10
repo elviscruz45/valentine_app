@@ -18,7 +18,7 @@ class Login extends Component {
           style={{ width: 60, height: 60 }}
         />
         <Image
-          source={require("../assets/valentine.png")}
+          source={require("../assets/teseo3.png")}
           style={{ width: 232, height: 73 }}
         />
         <TextInput
