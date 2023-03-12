@@ -1,11 +1,11 @@
 import React from "react";
-import { Text, View, Image, FlatList } from "react-native";
+import { Text, View, Image, FlatList, TouchableOpacity } from "react-native";
 import styles from "../styles";
 import { connect } from "react-redux";
 import { add1, subtract1 } from "../actions";
 import { logout } from "../actions/user";
 import { getPosts } from "../actions/post";
-import { post, uploadPost } from "../actions/post";
+import { post, uploadPost, likePost, unlikePost } from "../actions/post";
 import {
   AntDesign,
   MaterialCommunityIcons,
@@ -16,6 +16,20 @@ class Home extends React.Component {
   componentDidMount() {
     this.props.getPosts();
   }
+
+  likePost = (post) => {
+    const { uid } = this.props;
+    if (post.likes.includes(uid)) {
+      this.props.unlikePost(post, uid);
+      this.props.getPosts();
+      console.log("unlike");
+    } else {
+      this.props.likePost(post, uid);
+      console.log("like");
+      this.props.getPosts();
+    }
+  };
+
   render() {
     if (this.props.post_list === null) return null;
     return (
@@ -56,7 +70,8 @@ class Home extends React.Component {
               </View>
               <View style={[styles.row, styles.center]}>
                 <Text style={{ margin: 5, color: "#5B5B5B" }}>
-                  {"Date: March 07, 2023 17:00 Hr "}
+                  {"Date: "}
+                  {item.timestamp.toDate().toLocaleString()}
                 </Text>
                 <Text style={{ margin: 5, color: "black" }}>
                   {"2 photos more ...  "}
@@ -70,12 +85,19 @@ class Home extends React.Component {
 
                 <View style={styles.row}>
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <AntDesign
-                      style={{ margin: 10 }}
-                      name="like2"
-                      size={24}
-                      color="black"
-                    />
+                    <TouchableOpacity onPress={() => this.likePost(item)}>
+                      <AntDesign
+                        style={{ margin: 10 }}
+                        color="E35622"
+                        name={
+                          item.likes.includes(this.props.uid)
+                            ? "like1"
+                            : "like2"
+                        }
+                        size={24}
+                      />
+                    </TouchableOpacity>
+
                     <Text>15 Likes</Text>
                   </View>
                   <MaterialCommunityIcons
@@ -124,4 +146,6 @@ export default connect(mapStateToProps, {
   post,
   uploadPost,
   getPosts,
+  likePost,
+  unlikePost,
 })(Home);

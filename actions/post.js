@@ -5,6 +5,9 @@ import {
   getDocs,
   addDoc,
   updateDoc,
+  serverTimestamp,
+  arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -62,15 +65,20 @@ export const uploadPost_Photo = (upload) => async (dispatch) => {
   try {
     const docRef = await addDoc(collection(dbase, "posts"), upload);
     const uuid = uuidv4();
-    const new_upload = { ...upload, id: docRef.id, photo_uuid: uuid };
+    const new_upload = {
+      ...upload,
+      id: docRef.id,
+      photo_uuid: uuid,
+      timestamp: serverTimestamp(),
+    };
     const washingtonRef = doc(dbase, "posts", docRef.id);
     await updateDoc(washingtonRef, new_upload);
 
     // to upload a photo in the firebase storage
-    dispatch({
-      type: "SET_PHOTO_STORAGE_UUID",
-      payload: uuid,
-    });
+    // dispatch({
+    //   type: "SET_PHOTO_STORAGE_UUID",
+    //   payload: uuid,
+    // });
     const storageRef = ref(storage, `${uuid}`);
     fetch(upload.postPhoto)
       .then((response) => response.blob())
@@ -85,13 +93,13 @@ export const uploadPost_Photo = (upload) => async (dispatch) => {
           photo_uuid: uuid,
           postPhoto: url,
         };
-        const washingtonRef2 = doc(dbase, "posts", docRef.id);
-        updateDoc(washingtonRef2, new_upload2);
+        const Ref2 = doc(dbase, "posts", docRef.id);
+        updateDoc(Ref2, new_upload2);
         alert("your post have been uploaded");
-        dispatch({
-          type: "ADDING_NEW_POST",
-          payload: new_upload2,
-        });
+        // dispatch({
+        //   type: "ADDING_NEW_POST",
+        //   payload: new_upload2,
+        // });
         dispatch({
           type: "UPDATE_DESCRIPTION",
           payload: "",
@@ -104,5 +112,37 @@ export const uploadPost_Photo = (upload) => async (dispatch) => {
     ("Completed");
   } catch (error) {
     alert(error.message);
+  }
+};
+
+export const photo_location = (loc) => (dispatch) => {
+  dispatch({
+    type: "UPDATE_LOCATION",
+    payload: loc,
+  });
+};
+
+export const likePost = (post, uid) => async (dispatch) => {
+  try {
+    const Ref = doc(dbase, "posts", post.id);
+    await updateDoc(Ref, {
+      likes: arrayUnion(uid),
+    });
+
+    // await Promise.resolve(getPosts());
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const unlikePost = (post, uid) => async (dispatch) => {
+  try {
+    const Ref = doc(dbase, "posts", post.id);
+    await updateDoc(Ref, {
+      likes: arrayRemove(uid),
+    });
+    // await Promise.resolve(getPosts());
+  } catch (error) {
+    console.error(error);
   }
 };

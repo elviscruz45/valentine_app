@@ -3,6 +3,8 @@ const INITIAL_STATE = {
   post_list: null,
   photo_uri: null,
   photo_uuid: null,
+  location: null,
+  likes: [],
 };
 
 function post(state = INITIAL_STATE, action) {
@@ -31,6 +33,11 @@ function post(state = INITIAL_STATE, action) {
       return {
         ...state,
         post_list: [...state.post_list, action.payload],
+      };
+    case "UPDATE_LOCATION":
+      return {
+        ...state,
+        location: action.payload,
       };
     default:
       return state;
