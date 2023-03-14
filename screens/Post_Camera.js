@@ -10,9 +10,12 @@ import {
 import React, { Component } from "react";
 import styles from "../styles";
 import { connect } from "react-redux";
-import { post, getPosts } from "../actions/post";
-import { uploadPost_Photo } from "../actions/post";
-import { photo_location } from "../actions/post";
+import {
+  post,
+  getPosts,
+  uploadPost_Photo,
+  photo_location,
+} from "../actions/post";
 
 class Post_Camera extends Component {
   state = {
@@ -45,6 +48,7 @@ class Post_Camera extends Component {
       photo_uuid: photo_uuid,
       likes: likes,
     };
+    console.log(this.props);
     await this.props.uploadPost_Photo(upload);
     await this.props.getPosts();
     this.props.navigation.navigate("Home");

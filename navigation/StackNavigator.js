@@ -5,12 +5,18 @@ import Camera from "../screens/Camera";
 import { Image, View, TouchableOpacity, Text } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import Post_Camera from "../screens/Post_Camera";
+import Profile from "../screens/Profile";
+import EditProfile from "../screens/EditProfile";
 
 const Stack = createStackNavigator();
 
 export function HomeScreen(props) {
   function handleCameraPress() {
     props.navigation.navigate("Camera");
+    // navigation.navigate("Camera");
+  }
+  function profile_screen() {
+    props.navigation.navigate("profile");
     // navigation.navigate("Camera");
   }
   return (
@@ -35,10 +41,12 @@ export function HomeScreen(props) {
           ),
 
           headerLeft: () => (
-            <Image
-              source={require("../assets/Elvis_Cruz_Formal.jpg")}
-              style={styles.roundImage}
-            />
+            <TouchableOpacity onPress={() => profile_screen()}>
+              <Image
+                source={require("../assets/Elvis_Cruz_Formal.jpg")}
+                style={styles.roundImage}
+              />
+            </TouchableOpacity>
           ),
           // title: "",
           headerRight: () => (
@@ -88,6 +96,28 @@ export function HomeScreen(props) {
           // headerShown: false,
           headerTransparent: true,
           headerBackTitle: "Photo",
+          headerTintColor: "black",
+        }}
+      />
+      <Stack.Screen
+        name="profile"
+        component={Profile}
+        options={{
+          title: "",
+          // headerShown: false,
+          headerTransparent: true,
+          headerBackTitle: "Home",
+          headerTintColor: "black",
+        }}
+      />
+      <Stack.Screen
+        name="edit_profile"
+        component={EditProfile}
+        options={{
+          title: "",
+          // headerShown: false,
+          headerTransparent: true,
+          headerBackTitle: "Profile",
           headerTintColor: "black",
         }}
       />

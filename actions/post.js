@@ -8,6 +8,8 @@ import {
   serverTimestamp,
   arrayUnion,
   arrayRemove,
+  setDoc,
+  deleteDoc,
 } from "firebase/firestore";
 
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -128,8 +130,19 @@ export const likePost = (post, uid) => async (dispatch) => {
     await updateDoc(Ref, {
       likes: arrayUnion(uid),
     });
+    const activityId = `${post.uid}+auth+${post.id}`;
 
-    // await Promise.resolve(getPosts());
+    await setDoc(doc(dbase, "activity", activityId), {
+      postId: post.id,
+      postDescription: post.postDescription,
+      postPhoto: post.postPhoto,
+      likerId: post.uid,
+      likerPhoto: post.photo,
+      likerName: post.username,
+      uid: post.id,
+      date: new Date().getTime(),
+      type: "LIKE",
+    });
   } catch (error) {
     console.error(error);
   }
@@ -138,9 +151,13 @@ export const likePost = (post, uid) => async (dispatch) => {
 export const unlikePost = (post, uid) => async (dispatch) => {
   try {
     const Ref = doc(dbase, "posts", post.id);
+    const activityId = `${post.uid}+auth+${post.id}`;
+
     await updateDoc(Ref, {
       likes: arrayRemove(uid),
     });
+    await deleteDoc(doc(dbase, "activity", activityId));
+
     // await Promise.resolve(getPosts());
   } catch (error) {
     console.error(error);

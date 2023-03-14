@@ -9,6 +9,11 @@ export default styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  containerPost: {
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   center: {
     alignItems: "center",
     justifyContent: "space-between",
@@ -61,5 +66,28 @@ export default styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     margin: 5,
+  },
+  roundImageUpload: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    textAlign: "center",
+  },
+  roundImageUpload: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    margin: 5,
+    alignItems: "center",
+  },
+  buttonSmall: {
+    margin: 10,
+    marginBottom: 0,
+    padding: 5,
+    alignItems: "center",
+    borderColor: "#d3d3d3",
+    borderWidth: 1,
+    borderRadius: 5,
+    width: 125,
   },
 });
