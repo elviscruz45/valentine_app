@@ -7,6 +7,7 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import Post_Camera from "../screens/Post_Camera";
 import Profile from "../screens/Profile";
 import EditProfile from "../screens/EditProfile";
+import Comments from "../screens/Comments";
 
 const Stack = createStackNavigator();
 
@@ -118,6 +119,17 @@ export function HomeScreen(props) {
           // headerShown: false,
           headerTransparent: true,
           headerBackTitle: "Profile",
+          headerTintColor: "black",
+        }}
+      />
+      <Stack.Screen
+        name="comments"
+        component={Comments}
+        options={{
+          title: " ",
+          // headerShown: false,
+          headerTransparent: false,
+          headerBackTitle: "Home",
           headerTintColor: "black",
         }}
       />

@@ -6,6 +6,7 @@ import { add1, subtract1 } from "../actions";
 import { logout } from "../actions/user";
 import { getPosts } from "../actions/post";
 import { post, uploadPost, likePost, unlikePost } from "../actions/post";
+import { actualCommentId, actualPostDescription } from "../actions/comments";
 import {
   AntDesign,
   MaterialCommunityIcons,
@@ -28,6 +29,12 @@ class Home extends React.Component {
       console.log("like");
       this.props.getPosts();
     }
+  };
+  comments = (item) => {
+    this.props.actualCommentId(item.id);
+    this.props.actualPostDescription(item.postDescription);
+
+    this.props.navigation.navigate("comments");
   };
 
   render() {
@@ -98,16 +105,22 @@ class Home extends React.Component {
                       />
                     </TouchableOpacity>
 
-                    <Text>15 Likes</Text>
+                    <Text>015 Likes</Text>
                   </View>
-                  <MaterialCommunityIcons
-                    style={{ margin: 10, marginLeft: 90 }}
-                    name="comment-text-outline"
-                    size={24}
-                    color="black"
-                  />
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <TouchableOpacity onPress={() => this.comments(item)}>
+                      <MaterialCommunityIcons
+                        style={{ margin: 10, marginLeft: 70 }}
+                        name="comment-text-outline"
+                        size={24}
+                        color="black"
+                      />
+                    </TouchableOpacity>
+
+                    <Text>015 Comments</Text>
+                  </View>
                   <FontAwesome
-                    style={{ margin: 10, marginLeft: 120 }}
+                    style={{ margin: 10, marginLeft: 35 }}
                     name="send-o"
                     size={24}
                     color="black"
@@ -148,4 +161,6 @@ export default connect(mapStateToProps, {
   getPosts,
   likePost,
   unlikePost,
+  actualCommentId,
+  actualPostDescription,
 })(Home);

@@ -1,6 +1,5 @@
 import { collection, doc, setDoc, getDoc } from "firebase/firestore";
 import { dbase } from "../config/firebase";
-
 import {
   getAuth,
   createUserWithEmailAndPassword,

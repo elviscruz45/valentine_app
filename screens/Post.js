@@ -62,6 +62,7 @@ class Post extends Component {
       photo_uri,
       photo_uuid,
       likes,
+      comments,
     } = this.props;
     const upload = {
       postPhoto: this.state.image,
@@ -73,6 +74,7 @@ class Post extends Component {
       email: email,
       photo_uuid: photo_uuid,
       likes: likes,
+      comments: comments,
     };
     await this.props.uploadPost_Photo(upload);
     await this.props.getPosts();
@@ -166,6 +168,7 @@ const mapStateToProps = (reducers) => {
     photo_uuid: reducers.post.photo_uuid,
     location: reducers.post.location,
     likes: reducers.post.likes,
+    comments: reducers.comments.comments,
   };
 };
 

@@ -90,4 +90,22 @@ export default styles = StyleSheet.create({
     borderRadius: 5,
     width: 125,
   },
+  bordercomment: {
+    width: "85%",
+    margin: 10,
+    padding: 10,
+    fontSize: 16,
+    borderColor: "#d3d3d3",
+    borderBottomWidth: 1,
+    textAlign: "center",
+  },
+  postcomment: {
+    width: "0%",
+    margin: 0,
+    padding: 0,
+    fontSize: 16,
+    borderColor: "#d3d3d3",
+    borderBottomWidth: 0,
+    textAlign: "left",
+  },
 });
